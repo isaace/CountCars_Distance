@@ -6,11 +6,6 @@ import RPi.GPIO as GPIO
 
 import utils as u
 
-# Which GPIO's are used [0]=BCM Port Number [1]=BCM Name [2]=Use [3]=Pin
-# ----------------------------------------------------------------------
-GPIO_ECHO = 17
-GPIO_TRIG = 4
-
 def distance(GPIO_ECHO,GPIO_TRIG):
     u.debug_print ("GPIO_TRIG = " + str(GPIO_TRIG) + ",GPIO_ECHO = " + str(GPIO_ECHO))
     # Set GPIO Channels
@@ -87,6 +82,19 @@ def distance(GPIO_ECHO,GPIO_TRIG):
         return min_dist
 
 
+# Which GPIO's are used [0]=BCM Port Number [1]=BCM Name [2]=Use [3]=Pin
+# ----------------------------------------------------------------------
+GPIO_ECHO = 21
+GPIO_TRIG = 20
+
+#Global defines
+sleep_const = 0.5 #sleep period between each sampling
+
 #__main__
 u.debug_print("Hello WeroJam")
 
+while 1:
+    print("Start counting\n")
+    curDist = distance(GPIO_ECHO,GPIO_TRIG)
+    print("curDist is " + str(curDist) + "cm.\n")
+    debug_print("sleeping for " + str(sleep_const) +  " seconds\n",True)
