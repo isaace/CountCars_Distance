@@ -3,8 +3,8 @@
 
 # General imports
 import RPi.GPIO as GPIO
-
 import utils as u
+import time
 
 def distance(GPIO_ECHO,GPIO_TRIG):
     u.debug_print ("GPIO_TRIG = " + str(GPIO_TRIG) + ",GPIO_ECHO = " + str(GPIO_ECHO))
@@ -31,7 +31,7 @@ def distance(GPIO_ECHO,GPIO_TRIG):
 
     # Go
     # --
-    debug_print("Running....")
+    u.debug_print("Running....")
     min_dist = 100
 
     # Never ending loop
@@ -70,10 +70,10 @@ def distance(GPIO_ECHO,GPIO_TRIG):
         # Display distance
         if i_countdown > 0:
             i_distance = (echoduration*1000000)/58
-            debug_print("Distance = " + str(i_distance) + "cm")
+            u.debug_print("Distance = " + str(i_distance) + "cm")
             min_dist = min(min_dist,i_distance)
         else:
-            debug_print("Distance - timeout")
+            u.debug_print("Distance - timeout")
 
             # Wait at least .01s before re trig (or in this case .1s)
             time.sleep(.1)
@@ -88,7 +88,7 @@ GPIO_ECHO = 21
 GPIO_TRIG = 20
 
 #Global defines
-sleep_const = 0.5 #sleep period between each sampling
+sleep_const = 2.5 #sleep period between each sampling
 
 #__main__
 u.debug_print("Hello WeroJam")
@@ -97,4 +97,5 @@ while 1:
     print("Start counting\n")
     curDist = distance(GPIO_ECHO,GPIO_TRIG)
     print("curDist is " + str(curDist) + "cm.\n")
-    debug_print("sleeping for " + str(sleep_const) +  " seconds\n",True)
+    u.debug_print("sleeping for " + str(sleep_const) +  " seconds\n",True)
+    time.sleep(sleep_const)
