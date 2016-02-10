@@ -88,14 +88,23 @@ GPIO_ECHO = 21
 GPIO_TRIG = 20
 
 #Global defines
-sleep_const = 2.5 #sleep period between each sampling
+sleep_const = 0.5 #sleep period between each sampling
+green_light_interval = 10 #how long we will have the green light, in seconds
 
 #__main__
 u.debug_print("Hello WeroJam")
 
 while 1:
+    i = 0
+    t_end = time.time() + green_light_interval
     print("Start counting\n")
-    curDist = distance(GPIO_ECHO,GPIO_TRIG)
-    print("curDist is " + str(curDist) + "cm.\n")
-    u.debug_print("sleeping for " + str(sleep_const) +  " seconds\n",True)
-    time.sleep(sleep_const)
+    while time.time() < t_end:
+        curDist = distance(GPIO_ECHO,GPIO_TRIG)
+        #print("curDist is " + str(curDist) + "cm.\n")
+        #u.debug_print("sleeping for " + str(sleep_const) +  " seconds\n",True)
+        time.sleep(sleep_const)
+        if curDist < 25:
+            i+=1
+    u.debug_print("During the last "+str(sleep_const)+"seconds, "+str(i)+" cars passed")
+
+
