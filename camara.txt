@@ -1,0 +1,20 @@
+{user pi with the password raspberry}
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install motion
+sudo vi /etc/motion/motion.conf
+	daemon on
+	webcam_localhost off
+	webcam_maxrate 100
+	width 640
+	hight 480
+	framerate 100
+sudo /etc/default/motion
+	start_motion_deamon=yes
+sudo service motion start
+{open browser at port 8081}
+sudo raspi-config
+sudo get-apt install rpi-update
+sudo rpi-update
+sudo reboot
+sudo get-apt install libjpeg62
