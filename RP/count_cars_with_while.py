@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+#This job will detect car at min range, than it will wait till the distwill be long till the next trafick light
+
 # General imports
 import RPi.GPIO as GPIO
 import utils as u
